@@ -1,0 +1,45 @@
+ /*
+ Name: Cargino Chavez. Project name: TicTacToe Game
+ Date: 12-5-16. Class: CSC 15. Sacramento State University
+ Professor: Gita Faroughi
+  */
+import java.util.*;
+//import javax.swing.*; // optional not used
+public class PlayTicTacToe
+{
+	public static void main(String[] args)
+	{
+		char player = TicTacToe.PLAYER_O;//This was created to have a player that can be modified while playing
+		Scanner keyboard = new Scanner(System.in);
+		String player_O="";
+        String player_X="";
+        int numberOfMoves;
+        String playAgainAnswer;
+        do {
+            System.out.println("What is the Name of the player who will play X's? ");
+            //JOptionPane.showInputDialog("What is the Name of the player who will play X's? ");
+            player_X=keyboard.next();
+            System.out.println("What is the Name of the player who will play O's?");
+            //JOptionPane.showInputDialog("What is the Name of the player who will play O's?");
+            player_O=keyboard.next();
+            TicTacToe game=new TicTacToe(player_X,player_O);
+            game.initializeBoard();//Resets the boardgame
+            numberOfMoves=0;
+            while(!game.isWinner(player)&&numberOfMoves<=9) {
+                if (player == TicTacToe.PLAYER_O)
+                    player = TicTacToe.PLAYER_X;
+                else if (player == TicTacToe.PLAYER_X)
+                    player = TicTacToe.PLAYER_O;
+                game.takeATurn(keyboard,player);
+                numberOfMoves++;
+            }
+            game.displayBoard();
+            game.displayResults();
+            System.out.println("Do you want to play again? Y/N");
+            //JOptionPane.showInputDialog("Do you want to play again? Y/N");
+            playAgainAnswer=keyboard.next();
+        }while(playAgainAnswer.equalsIgnoreCase("yes")||playAgainAnswer.equalsIgnoreCase("y"));
+        System.out.println("Thank-you for playing Tic Tac Toe.\nHAVE A NICE DAY!");
+        //JOptionPane.showMessageDialog(null,"What is the Name of the player who will play O's?");
+	}
+}
